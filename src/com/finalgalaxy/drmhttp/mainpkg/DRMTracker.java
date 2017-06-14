@@ -1,4 +1,4 @@
-package engine;
+package com.finalgalaxy.drmhttp.mainpkg;
 
 import java.awt.AWTException;
 import java.awt.GraphicsDevice;
@@ -33,7 +33,7 @@ public class DRMTracker implements Runnable{
   
   /*
   * DRMTracker constructor. Serial and UUID number are generated depending on the operative system you're using
-  * (at the moment only Windows O.S. through fetching wmic output.
+  * (at the moment only Windows O.S. through fetching wmic output).
   *
   * Host must be passed as parameter to identify web server files necessary for authenticating the user.
   *
