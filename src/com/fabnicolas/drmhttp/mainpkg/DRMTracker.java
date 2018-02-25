@@ -1,4 +1,4 @@
-package com.finalgalaxy.drmhttp.mainpkg;
+package com.fabnicolas.drmhttp.mainpkg;
 
 import java.awt.AWTException;
 import java.awt.GraphicsDevice;
@@ -16,6 +16,8 @@ import java.util.zip.GZIPOutputStream;
 
 import javax.imageio.ImageIO;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -23,6 +25,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 
 
 public class DRMTracker implements Runnable{
@@ -118,11 +121,11 @@ public class DRMTracker implements Runnable{
     HttpClient httpclient = HttpClientBuilder.create().build();
     HttpPost httppost = new HttpPost(this.host+"screenshots/vercert.php?serial="+serial+"&uuid="+uuid+"&useraid="+os_user);
     httpclient.execute(httppost);
-    org.apache.http.HttpResponse response = httpclient.execute(httppost);
-    org.apache.http.HttpEntity resEntity = response.getEntity();
+    HttpResponse response = httpclient.execute(httppost);
+    HttpEntity resEntity = response.getEntity();
     
     if(resEntity != null){
-      return org.apache.http.util.EntityUtils.toString(resEntity);
+      return EntityUtils.toString(resEntity);
     }else{
       return "FAIL";
     }
@@ -169,7 +172,19 @@ public class DRMTracker implements Runnable{
     
     
     httppost.setEntity(mpEntity.build());
-    httpclient.execute(httppost);
+    /*HttpResponse response =*/ httpclient.execute(httppost);
+    
+    /*
+    int code = response.getStatusLine().getStatusCode();
+    System.out.print("STATUS: "+code+", RESPONSE=");
+    BufferedInputStream bis = new BufferedInputStream(response.getEntity().getContent());
+    ByteArrayOutputStream buf = new ByteArrayOutputStream();
+    int result = bis.read();
+    while(result != -1) {
+        buf.write((byte) result);
+        result = bis.read();
+    }
+    System.out.println(buf.toString("UTF-8"));*/
     
     new File(fullpath+"CACHE").delete();
     new File(fullpath).delete();

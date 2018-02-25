@@ -1,4 +1,4 @@
-package com.finalgalaxy.drmhttp.tests;
+package com.fabnicolas.drmhttp.tests;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import com.finalgalaxy.drmhttp.mainpkg.DRMTracker;
+import com.fabnicolas.drmhttp.mainpkg.DRMTracker;
 
 public class JUnit_DRMTest{
 	public static String result;
